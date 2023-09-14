@@ -1,0 +1,276 @@
+[gd_scene load_steps=17 format=3 uid="uid://bp346ji6popq"]
+
+[ext_resource type="Texture2D" uid="uid://vwpq1ndk525y" path="res://Textures/background.jpg" id="1_kwhuj"]
+[ext_resource type="Script" path="res://Scripts/MenuManager.gd" id="2_q5qvn"]
+[ext_resource type="StyleBox" uid="uid://g2kabwh48dej" path="res://Styles/button.tres" id="3_r4djq"]
+[ext_resource type="FontFile" uid="uid://kpjyknfak5ip" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="4_jhqqs"]
+[ext_resource type="Script" path="res://addons/fontawesome/FontAwesome.gd" id="5_pkpoj"]
+[ext_resource type="Texture2D" uid="uid://b2gj3yerjeygs" path="res://Textures/Planets/planet02.png" id="16_3o0uq"]
+[ext_resource type="Texture2D" uid="uid://vlawpoljy58a" path="res://Textures/Aliens/shipGreen_manned.png" id="18_lkf8d"]
+[ext_resource type="Texture2D" uid="uid://c8q3dral6hvtp" path="res://Textures/Aliens/shipPink_manned.png" id="20_fckc3"]
+[ext_resource type="FontFile" uid="uid://uodg0kj62tid" path="res://Fonts/General Sans/GeneralSans-Bold.otf" id="21_eaun7"]
+[ext_resource type="AudioStream" uid="uid://da3dj1ao82kvv" path="res://Audio/Music/music.ogg" id="22_l22hh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_semlx"]
+font = ExtResource("21_eaun7")
+font_size = 96
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_gfbf6"]
+font = ExtResource("21_eaun7")
+font_size = 48
+
+[sub_resource type="Animation" id="Animation_y7coc"]
+resource_name = "ball_rotate"
+length = 8.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-6.28319, 3.48787e-16]
+}
+
+[sub_resource type="Animation" id="Animation_vo2od"]
+resource_name = "hover"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(279, 851), Vector2(289, 860), Vector2(279, 851)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 4.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.366519, -0.279253, -0.366519]
+}
+
+[sub_resource type="Animation" id="Animation_k4a32"]
+resource_name = "hover_pink"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1750, 140), Vector2(1760, 130), Vector2(1750, 140)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 4.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.174533, 3.48787e-16, 0.174533]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_thvw3"]
+_data = {
+"ball_rotate": SubResource("Animation_y7coc"),
+"hover": SubResource("Animation_vo2od"),
+"hover_pink": SubResource("Animation_k4a32")
+}
+
+[node name="Scene Root" type="Node2D"]
+
+[node name="World" type="Node" parent="."]
+
+[node name="Background" type="Sprite2D" parent="World"]
+modulate = Color(0.435192, 0.435192, 0.435192, 1)
+z_index = -128
+position = Vector2(960, 400)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_kwhuj")
+
+[node name="Menu Manager" type="Node" parent="."]
+script = ExtResource("2_q5qvn")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -343.5
+offset_top = -300.0
+offset_right = 343.5
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="UI/Control/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Pong
+"
+label_settings = SubResource("LabelSettings_semlx")
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="UI/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "A RumpledCode microgame"
+label_settings = SubResource("LabelSettings_gfbf6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Gamepad" type="Label" parent="UI/Control/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+auto_translate = false
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("4_jhqqs")
+theme_override_font_sizes/font_size = 72
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_pkpoj")
+icon_size = 72
+icon_name = "gamepad"
+
+[node name="Space" type="Label" parent="UI/Control/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="UI/Control/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.619608, 0.415686, 1, 1)
+theme_override_fonts/font = ExtResource("21_eaun7")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = ExtResource("3_r4djq")
+theme_override_styles/hover = ExtResource("3_r4djq")
+theme_override_styles/pressed = ExtResource("3_r4djq")
+theme_override_styles/disabled = ExtResource("3_r4djq")
+theme_override_styles/focus = ExtResource("3_r4djq")
+text = "Play"
+
+[node name="LinkButton" type="LinkButton" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -142.0
+offset_top = -56.0
+offset_right = 142.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("21_eaun7")
+theme_override_font_sizes/font_size = 32
+text = "rumpledcode.com"
+uri = "https://rumpledcode.com"
+
+[node name="Music Player" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("22_l22hh")
+autoplay = true
+attenuation = 0.000523326
+panning_strength = 0.0
+
+[node name="AudioListener2D" type="AudioListener2D" parent="Music Player"]
+current = true
+
+[node name="Sound Effect Player" type="AudioStreamPlayer2D" parent="Music Player"]
+volume_db = -8.0
+attenuation = 0.0001
+max_polyphony = 8
+panning_strength = 0.0
+
+[node name="ShipGreenManned" type="Sprite2D" parent="."]
+position = Vector2(287.376, 858.538)
+rotation = -0.293428
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("18_lkf8d")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ShipGreenManned"]
+autoplay = "hover"
+libraries = {
+"": SubResource("AnimationLibrary_thvw3")
+}
+
+[node name="ShipPinkManned" type="Sprite2D" parent="."]
+position = Vector2(1757.29, 132.714)
+rotation = 0.0473627
+texture = ExtResource("20_fckc3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ShipPinkManned"]
+autoplay = "hover_pink"
+libraries = {
+"": SubResource("AnimationLibrary_thvw3")
+}
+
+[node name="Planet02" type="Sprite2D" parent="."]
+modulate = Color(0.603922, 0.572549, 0.984314, 1)
+position = Vector2(1451, 341)
+rotation = -6.28319
+scale = Vector2(0.063, 0.063)
+texture = ExtResource("16_3o0uq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Planet02"]
+autoplay = "ball_rotate"
+libraries = {
+"": SubResource("AnimationLibrary_thvw3")
+}
+
+[connection signal="button_down" from="UI/Control/MarginContainer/VBoxContainer/Button" to="Menu Manager" method="start_game"]

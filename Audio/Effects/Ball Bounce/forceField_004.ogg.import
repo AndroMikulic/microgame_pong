@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b1jdcrptonvhj"
+path="res://.godot/imported/forceField_004.ogg-491a62555a54e43f0451370733a70384.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/Effects/Ball Bounce/forceField_004.ogg"
+dest_files=["res://.godot/imported/forceField_004.ogg-491a62555a54e43f0451370733a70384.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

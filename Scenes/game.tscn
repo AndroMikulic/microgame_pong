@@ -1,0 +1,239 @@
+[gd_scene load_steps=29 format=3 uid="uid://bfbx7tqivnybu"]
+
+[ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_26s68"]
+[ext_resource type="Texture2D" uid="uid://vwpq1ndk525y" path="res://Textures/background.jpg" id="1_yrqe4"]
+[ext_resource type="FontFile" uid="uid://uodg0kj62tid" path="res://Fonts/General Sans/GeneralSans-Bold.otf" id="2_rxvpm"]
+[ext_resource type="Script" path="res://Scripts/PlayerGoal.gd" id="3_xthps"]
+[ext_resource type="Script" path="res://Scripts/BotGoal.gd" id="4_kve35"]
+[ext_resource type="Script" path="res://Scripts/Ball.gd" id="5_1rn6d"]
+[ext_resource type="Texture2D" uid="uid://b2gj3yerjeygs" path="res://Textures/Planets/planet02.png" id="5_57w7x"]
+[ext_resource type="AudioStream" uid="uid://bcioxleev43lt" path="res://Audio/Effects/Goal/laserLarge_000.ogg" id="5_qqqcn"]
+[ext_resource type="AudioStream" uid="uid://dxn7330a6sa0d" path="res://Audio/Effects/Goal/laserLarge_001.ogg" id="6_0iain"]
+[ext_resource type="AudioStream" uid="uid://bnfjfobm53m6f" path="res://Audio/Effects/Ball Bounce/forceField_000.ogg" id="6_2b7qb"]
+[ext_resource type="Texture2D" uid="uid://vlawpoljy58a" path="res://Textures/Aliens/shipGreen_manned.png" id="6_lv7lh"]
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="6_xijqh"]
+[ext_resource type="AudioStream" uid="uid://opa0wjyf8pn3" path="res://Audio/Effects/Ball Bounce/forceField_001.ogg" id="7_b65xl"]
+[ext_resource type="AudioStream" uid="uid://b8m1wnaf0ipny" path="res://Audio/Effects/Goal/laserLarge_002.ogg" id="7_nngup"]
+[ext_resource type="AudioStream" uid="uid://qnedg62uvh2k" path="res://Audio/Effects/Ball Bounce/forceField_002.ogg" id="8_fussv"]
+[ext_resource type="AudioStream" uid="uid://bbqm8isifhwyi" path="res://Audio/Effects/Goal/laserLarge_003.ogg" id="8_v1y2d"]
+[ext_resource type="AudioStream" uid="uid://c6620rcaltyxu" path="res://Audio/Effects/Goal/laserLarge_004.ogg" id="9_jc705"]
+[ext_resource type="AudioStream" uid="uid://duju25mf0jtke" path="res://Audio/Effects/Ball Bounce/forceField_003.ogg" id="9_mmamo"]
+[ext_resource type="Script" path="res://Scripts/Bot.gd" id="9_uqm84"]
+[ext_resource type="Texture2D" uid="uid://c8q3dral6hvtp" path="res://Textures/Aliens/shipPink_manned.png" id="10_fombh"]
+[ext_resource type="AudioStream" uid="uid://b1jdcrptonvhj" path="res://Audio/Effects/Ball Bounce/forceField_004.ogg" id="10_g8qv7"]
+[ext_resource type="AudioStream" uid="uid://da3dj1ao82kvv" path="res://Audio/Music/music.ogg" id="12_xa78o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wmqjs"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wiip8"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4gat5"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mtpgc"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jt3xc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_semlx"]
+font = ExtResource("2_rxvpm")
+font_size = 64
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
+
+[node name="Scene Root" type="Node2D"]
+
+[node name="World" type="Node" parent="."]
+
+[node name="Background" type="Sprite2D" parent="World"]
+modulate = Color(0.435192, 0.435192, 0.435192, 1)
+z_index = -128
+position = Vector2(960, 400)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_yrqe4")
+
+[node name="Goals" type="Node" parent="World"]
+
+[node name="Bot Goal" type="Node" parent="World/Goals"]
+
+[node name="Trigger" type="Area2D" parent="World/Goals/Bot Goal" node_paths=PackedStringArray("game_manager")]
+position = Vector2(1960, 540)
+rotation = 1.5708
+scale = Vector2(32, 0.0312502)
+input_pickable = false
+script = ExtResource("4_kve35")
+game_manager = NodePath("../../../../Game Manager")
+
+[node name="Shape" type="CollisionShape2D" parent="World/Goals/Bot Goal/Trigger"]
+scale = Vector2(4, 128)
+shape = SubResource("RectangleShape2D_wmqjs")
+debug_color = Color(0.988235, 0, 0.313726, 0.419608)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="World/Goals/Bot Goal"]
+position = Vector2(1960, 540)
+
+[node name="Shape2" type="CollisionShape2D" parent="World/Goals/Bot Goal/StaticBody2D"]
+rotation = 1.5708
+scale = Vector2(128, 4)
+skew = -4.19617e-05
+shape = SubResource("RectangleShape2D_wmqjs")
+debug_color = Color(0.988235, 0, 0.313726, 0.419608)
+
+[node name="Player Goal" type="Node" parent="World/Goals"]
+
+[node name="Trigger" type="Area2D" parent="World/Goals/Player Goal" node_paths=PackedStringArray("game_manager")]
+position = Vector2(-40, 540)
+rotation = 1.5708
+scale = Vector2(32, 0.0312502)
+input_pickable = false
+script = ExtResource("3_xthps")
+game_manager = NodePath("../../../../Game Manager")
+
+[node name="Shape" type="CollisionShape2D" parent="World/Goals/Player Goal/Trigger"]
+scale = Vector2(4, 128)
+shape = SubResource("RectangleShape2D_wmqjs")
+debug_color = Color(0.988235, 0, 0.313726, 0.419608)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="World/Goals/Player Goal"]
+position = Vector2(-40, 540)
+
+[node name="Shape2" type="CollisionShape2D" parent="World/Goals/Player Goal/StaticBody2D"]
+rotation = 1.5708
+scale = Vector2(128, 4)
+shape = SubResource("RectangleShape2D_wmqjs")
+debug_color = Color(0.988235, 0, 0.313726, 0.419608)
+
+[node name="Walls" type="StaticBody2D" parent="World"]
+position = Vector2(960, 540)
+collision_layer = 3
+
+[node name="Top Wall" type="CollisionShape2D" parent="World/Walls"]
+position = Vector2(2.08165e-12, -580)
+scale = Vector2(128, 4)
+shape = SubResource("RectangleShape2D_wmqjs")
+debug_color = Color(0.662745, 0.513726, 0, 0.419608)
+
+[node name="Bottom Wall" type="CollisionShape2D" parent="World/Walls"]
+position = Vector2(2.08165e-12, 580)
+scale = Vector2(128, 4)
+shape = SubResource("RectangleShape2D_wmqjs")
+debug_color = Color(0.662745, 0.513726, 0, 0.419608)
+
+[node name="Game Manager" type="Node" parent="." node_paths=PackedStringArray("score_label", "ball", "sound_effect_player")]
+script = ExtResource("1_26s68")
+score_label = NodePath("../UI/Control/MarginContainer/Label")
+ball = NodePath("Ball")
+sound_effect_player = NodePath("../Music Player/Sound Effect Player")
+goal_sound_effect = Array[AudioStream]([ExtResource("5_qqqcn"), ExtResource("6_0iain"), ExtResource("7_nngup"), ExtResource("8_v1y2d"), ExtResource("9_jc705")])
+
+[node name="Ball" type="RigidBody2D" parent="Game Manager" node_paths=PackedStringArray("sound_effect_player")]
+position = Vector2(960, 540)
+physics_material_override = SubResource("PhysicsMaterial_wiip8")
+gravity_scale = 2.66454e-15
+max_contacts_reported = 8
+contact_monitor = true
+can_sleep = false
+linear_velocity = Vector2(1024, 2.08165e-12)
+linear_damp_mode = 1
+angular_velocity = 1.5708
+angular_damp_mode = 1
+script = ExtResource("5_1rn6d")
+min_x_speed = 256.0
+sound_effect_player = NodePath("../../Music Player/Sound Effect Player")
+hit_sound_effect = Array[AudioStream]([ExtResource("6_2b7qb"), ExtResource("7_b65xl"), ExtResource("8_fussv"), ExtResource("9_mmamo"), ExtResource("10_g8qv7")])
+metadata/Type = "Player"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game Manager/Ball"]
+scale = Vector2(4, 4)
+shape = SubResource("CircleShape2D_4gat5")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="Sprite" type="Sprite2D" parent="Game Manager/Ball/CollisionShape2D"]
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("5_57w7x")
+
+[node name="Player" type="AnimatableBody2D" parent="Game Manager"]
+position = Vector2(128, 540)
+collision_mask = 2
+physics_material_override = SubResource("PhysicsMaterial_mtpgc")
+sync_to_physics = false
+script = ExtResource("6_xijqh")
+speed = 600.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game Manager/Player"]
+scale = Vector2(8, 8)
+shape = SubResource("CircleShape2D_jt3xc")
+
+[node name="ShipGreenManned" type="Sprite2D" parent="Game Manager/Player/CollisionShape2D"]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_lv7lh")
+
+[node name="Bot" type="AnimatableBody2D" parent="Game Manager" node_paths=PackedStringArray("ball")]
+position = Vector2(1792, 540)
+collision_mask = 2
+physics_material_override = SubResource("PhysicsMaterial_mtpgc")
+sync_to_physics = false
+script = ExtResource("9_uqm84")
+ball = NodePath("../Ball")
+speed = 600.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game Manager/Bot"]
+scale = Vector2(8, 8)
+shape = SubResource("CircleShape2D_jt3xc")
+
+[node name="ShipPinkManned" type="Sprite2D" parent="Game Manager/Bot/CollisionShape2D"]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("10_fombh")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Label" type="Label" parent="UI/Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "0 : 0"
+label_settings = SubResource("LabelSettings_semlx")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Music Player" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_xa78o")
+autoplay = true
+attenuation = 0.000523326
+panning_strength = 0.0
+
+[node name="AudioListener2D" type="AudioListener2D" parent="Music Player"]
+current = true
+
+[node name="Sound Effect Player" type="AudioStreamPlayer2D" parent="Music Player"]
+volume_db = -8.0
+attenuation = 0.0001
+max_polyphony = 8
+panning_strength = 0.0
+
+[connection signal="body_entered" from="World/Goals/Bot Goal/Trigger" to="World/Goals/Bot Goal/Trigger" method="body_entered"]
+[connection signal="body_entered" from="World/Goals/Player Goal/Trigger" to="World/Goals/Player Goal/Trigger" method="body_entered"]
+[connection signal="body_entered" from="Game Manager/Ball" to="Game Manager/Ball" method="play_hit_sound"]
